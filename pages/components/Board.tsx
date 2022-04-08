@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Letter from "./Letter";
-import { GetStaticProps } from "next";
 
 const Board = (props: any) => {
-	const [input, setInput] = useState<string>();
+	const [input, setInput] = useState<string>("");
+	const [words, setWords] = useState<string[]>();
+	useEffect(() => {
+		const fetchWords = async () => {
+			const res = await fetch("http://localhost:3000/api/words");
+			const data = await res.json();
+			setWords(data);
+		};
+		fetchWords();
+	}, []);
+	console.log(
+		words?.filter((word) => {
+			return word === input;
+		})
+	);
 
 	return (
 		<div className="flex justify-center items-center w-full h-screen">
-			{input?.split("")?.map((letter) => {
-				return <Letter letter={letter} />;
+			{input?.split("")?.map((letter, i) => {
+				return <Letter key={letter + i} letter={letter} />;
 			})}
 			<button
 				onClick={() => {
@@ -17,7 +30,6 @@ const Board = (props: any) => {
 			>
 				XDD
 			</button>
-			{/* {console.log(words)} */}
 			<input
 				// className=" opacity-0"
 				placeholder="JD"
@@ -29,19 +41,13 @@ const Board = (props: any) => {
 					setInput(e.target.value);
 				}}
 			/>
+			{words?.filter((word) => {
+				return word === input;
+			}).length
+				? "jd"
+				: ""}
 		</div>
 	);
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-	const res = await fetch("./api/words");
-	const words = await res.json();
-
-	return {
-		props: {
-			words: "asdasasdsa",
-		},
-	};
 };
 
 export default Board;
