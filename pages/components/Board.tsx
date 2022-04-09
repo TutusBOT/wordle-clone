@@ -1,53 +1,17 @@
-import { useState, useEffect } from "react";
-import Letter from "./Letter";
+import React, { useState } from "react";
+import Row from "./Row";
 
-const Board = (props: any) => {
-	const [input, setInput] = useState<string>("");
-	const [words, setWords] = useState<string[]>();
-	useEffect(() => {
-		const fetchWords = async () => {
-			const res = await fetch("http://localhost:3000/api/words");
-			const data = await res.json();
-			setWords(data);
-		};
-		fetchWords();
-	}, []);
-	console.log(
-		words?.filter((word) => {
-			return word === input;
-		})
-	);
-
+function Board2() {
 	return (
-		<div className="flex justify-center items-center w-full h-screen">
-			{input?.split("")?.map((letter, i) => {
-				return <Letter key={letter + i} letter={letter} />;
-			})}
-			<button
-				onClick={() => {
-					console.log(props);
-				}}
-			>
-				XDD
-			</button>
-			<input
-				// className=" opacity-0"
-				placeholder="JD"
-				type="text"
-				size={5}
-				maxLength={5}
-				value={input}
-				onChange={(e) => {
-					setInput(e.target.value);
-				}}
-			/>
-			{words?.filter((word) => {
-				return word === input;
-			}).length
-				? "jd"
-				: ""}
+		<div className="flex flex-col gap-1">
+			<Row attempt={0} />
+			<Row attempt={1} />
+			<Row attempt={2} />
+			<Row attempt={3} />
+			<Row attempt={4} />
+			<Row attempt={5} />
 		</div>
 	);
-};
+}
 
-export default Board;
+export default Board2;

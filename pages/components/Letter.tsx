@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "..";
 
-function Letter({ letter }: { letter: string }) {
-	return <div className=" text-5xl">{letter}</div>;
+function Letter({ position, attempt }: { position: number; attempt: number }) {
+	const { board } = useContext(AppContext);
+	console.log(board[attempt][position]);
+
+	return (
+		<div className=" text-5xl border border-white">
+			{board[attempt][position]}
+		</div>
+	);
 }
 
 export default Letter;
