@@ -7,17 +7,17 @@ function Keyboard() {
 	const keyRow3 = ["z", "x", "c", "v", "b", "n", "m"];
 	return (
 		<div>
-			<div className="flex justify-center">
+			<div className="flex justify-center gap-2">
 				{keyRow1.map((key) => {
 					return <Key key={key} letter={key} />;
 				})}
 			</div>
-			<div className="flex justify-center">
+			<div className="flex justify-center gap-2">
 				{keyRow2.map((key) => {
 					return <Key key={key} letter={key} />;
 				})}
 			</div>
-			<div className="flex justify-center">
+			<div className="flex justify-center gap-2">
 				<Key letter={"ENTER"}></Key>
 				{keyRow3.map((key) => {
 					return <Key key={key} letter={key} />;

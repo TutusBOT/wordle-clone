@@ -10,6 +10,37 @@ export const AppContext = createContext<any>(defaultBoard);
 
 const Home: NextPage = () => {
 	const [board, setBoard] = useState(defaultBoard);
+	const [currentAttempt, setCurrentAttempt] = useState({
+		attempt: 0,
+		position: 0,
+	});
+	const onDelete = () => {
+		if (!currentAttempt.position) return;
+		const currentBoard = [...board];
+		currentBoard[currentAttempt.attempt][currentAttempt.position - 1] = "";
+		setBoard(currentBoard);
+		setCurrentAttempt({
+			attempt: currentAttempt.attempt,
+			position: currentAttempt.position - 1,
+		});
+	};
+	const onEnter = () => {
+		if (currentAttempt.position !== 5) return;
+		setCurrentAttempt({
+			attempt: currentAttempt.attempt + 1,
+			position: 0,
+		});
+	};
+	const onLetter = (letter: string) => {
+		if (currentAttempt.position > 4) return;
+		const currentBoard = [...board];
+		currentBoard[currentAttempt.attempt][currentAttempt.position] = letter;
+		setBoard(currentBoard);
+		setCurrentAttempt({
+			attempt: currentAttempt.attempt,
+			position: currentAttempt.position + 1,
+		});
+	};
 
 	return (
 		<div className=" bg-black text-white h-screen">
@@ -20,7 +51,17 @@ const Home: NextPage = () => {
 			</Head>
 			<Navbar />
 			<main className="flex flex-col justify-center w-full">
-				<AppContext.Provider value={{ board, setBoard }}>
+				<AppContext.Provider
+					value={{
+						board,
+						setBoard,
+						currentAttempt,
+						setCurrentAttempt,
+						onDelete,
+						onEnter,
+						onLetter,
+					}}
+				>
 					<Board />
 					<Keyboard />
 				</AppContext.Provider>
