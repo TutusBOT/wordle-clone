@@ -1,6 +1,7 @@
+import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import Navbar from "./components/Navbar";
@@ -10,13 +11,27 @@ export const AppContext = createContext<any>(defaultBoard);
 
 const Home: NextPage = () => {
 	const [board, setBoard] = useState(defaultBoard);
+	const [currentWord, setCurrentWord] = useState("");
 	const [currentAttempt, setCurrentAttempt] = useState({
 		attempt: 0,
 		position: 0,
 	});
+	const randomWord = useCallback(async () => {
+		const res = await axios.get("http://localhost:3000/api/getRandomWord");
+		console.log(res.data);
+
+		return setCurrentWord(res.data);
+	}, []);
+	if (!currentWord) {
+		randomWord();
+	}
 	const onDelete = () => {
-		if (!currentAttempt.position) return;
 		const currentBoard = [...board];
+		if (
+			currentAttempt.position === 0 &&
+			currentBoard[currentAttempt.attempt][currentAttempt.position] === ""
+		)
+			return;
 		currentBoard[currentAttempt.attempt][currentAttempt.position - 1] = "";
 		setBoard(currentBoard);
 		setCurrentAttempt({
@@ -60,10 +75,18 @@ const Home: NextPage = () => {
 						onDelete,
 						onEnter,
 						onLetter,
+						currentWord,
 					}}
 				>
 					<Board />
 					<Keyboard />
+					<button
+						onClick={() => {
+							console.log(board, currentAttempt);
+						}}
+					>
+						XDD
+					</button>
 				</AppContext.Provider>
 			</main>
 
