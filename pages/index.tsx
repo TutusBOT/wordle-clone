@@ -1,7 +1,9 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
+import { wordsArray } from "./api/wordsArray";
+import { wordsSet } from "./api/wordsSet";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import Navbar from "./components/Navbar";
@@ -12,10 +14,16 @@ export const AppContext = createContext<any>(defaultBoard);
 const Home: NextPage = () => {
 	const [board, setBoard] = useState(defaultBoard);
 	const [currentWord, setCurrentWord] = useState("");
+	const [wordsSet, setWordsSet] = useState<Set<string>>();
+	useEffect(() => {
+		const set = new Set(wordsArray);
+		setWordsSet(set);
+	}, []);
 	const [currentAttempt, setCurrentAttempt] = useState({
 		attempt: 0,
 		position: 0,
 	});
+
 	const randomWord = useCallback(async () => {
 		const res = await axios.get("http://localhost:3000/api/getRandomWord");
 		console.log(res.data);
@@ -40,7 +48,18 @@ const Home: NextPage = () => {
 		});
 	};
 	const onEnter = () => {
+		// if(wordsArray.includes())
 		if (currentAttempt.position !== 5) return;
+		let word = "";
+		for (let i = 0; i < 5; i++) {
+			word += board[currentAttempt.attempt][i];
+		}
+		if (!wordsSet?.has(word)) {
+			() => {
+				// handle wrong word
+			};
+			return;
+		}
 		setCurrentAttempt({
 			attempt: currentAttempt.attempt + 1,
 			position: 0,
