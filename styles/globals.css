@@ -18,3 +18,15 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+@keyframes letter-rotate {
+	0% {
+		transform: rotate3d(1, 0, 0, 0deg);
+	}
+	50% {
+		transform: rotate3d(1, 0, 0, 90deg);
+	}
+	100% {
+		transform: rotate3d(1, 0, 0, 0deg);
+	}
+}

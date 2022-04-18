@@ -48,16 +48,14 @@ const Home: NextPage = () => {
 		});
 	};
 	const onEnter = () => {
-		// if(wordsArray.includes())
 		if (currentAttempt.position !== 5) return;
 		let word = "";
 		for (let i = 0; i < 5; i++) {
 			word += board[currentAttempt.attempt][i];
 		}
 		if (!wordsSet?.has(word)) {
-			() => {
-				// handle wrong word
-			};
+			// handle wrong word
+			alert("NOT IN A WORD LIST");
 			return;
 		}
 		setCurrentAttempt({
