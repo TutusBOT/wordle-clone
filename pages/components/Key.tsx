@@ -4,18 +4,29 @@ import { AppContext } from "..";
 function Key({
 	letter,
 	wrongLetters,
+	correctLetters,
+	almostCorrectLetters,
 }: {
 	letter: string;
 	wrongLetters: Set<string>;
+	correctLetters: Set<string>;
+	almostCorrectLetters: Set<string>;
 }) {
 	const { onEnter, onDelete, onLetter } = useContext(AppContext);
 	const keyTile = useRef<any>();
 	useEffect(() => {
 		if (wrongLetters.has(letter)) {
-			// keyState = "#000000";
 			keyTile.current.style.backgroundColor = "#3a3a3a";
 		}
-	}, [wrongLetters]);
+		// console.log(keyTile.current);
+
+		if (correctLetters.has(letter)) {
+			keyTile.current.style.backgroundColor = "#538d4e";
+		}
+		if (almostCorrectLetters.has(letter)) {
+			keyTile.current.style.backgroundColor = "#b59f3b";
+		}
+	}, [wrongLetters, correctLetters, almostCorrectLetters]);
 	const selectLetter = () => {
 		if (letter === "ENTER") {
 			onEnter();

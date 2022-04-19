@@ -42,30 +42,26 @@ function Letter({ position, attempt }: { position: number; attempt: number }) {
 	};
 	useEffect(() => {
 		if (currentAttempt.attempt > attempt) {
-			letterTile.current.style.animation = `letter-rotate 500ms ease-in-out ${
+			letterTile.current.style.animation = `letter-rotate 400ms ease-in-out ${
 				position * 200
 			}ms`;
-			if (!letter) return setLetterState("");
+			if (!letter) return setLetterState("transparent");
 			setTimeout(() => {
-				if (letter === currentWord[position])
-					return setLetterState("bg-green-500");
-				if (currentWord.includes(letter))
-					return setLetterState("bg-yellow-400");
-				return setLetterState("bg-gray-700");
-			}, 250 + position * 200);
+				if (letter === currentWord[position]) return setLetterState("#538d4e");
+				if (currentWord.includes(letter)) return setLetterState("#b59f3b");
+				return setLetterState("#3a3a3a");
+			}, 200 + position * 200);
 		}
 	}, [currentAttempt]);
 	return (
 		<div
 			ref={letterTile}
 			className={
-				(letterState ? letterState : "") +
 				" text-5xl border border-white capitalize w-12 h-12 text-center flex items-center justify-center"
 			}
-			// style={{
-			// 	transition: "all 500ms forwards",
-			// 	transform: "rotate3d(1, 0, 0, 360deg)",
-			// }}
+			style={{
+				backgroundColor: letterState,
+			}}
 		>
 			{letter}
 		</div>
