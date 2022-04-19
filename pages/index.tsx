@@ -23,6 +23,7 @@ const Home: NextPage = () => {
 		attempt: 0,
 		position: 0,
 	});
+	useEffect(() => {}, [currentAttempt.attempt]);
 
 	const randomWord = useCallback(async () => {
 		const res = await axios.get("http://localhost:3000/api/getRandomWord");

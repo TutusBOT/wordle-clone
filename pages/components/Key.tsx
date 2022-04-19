@@ -1,8 +1,21 @@
-import React, { useContext } from "react";
+import React, { MutableRefObject, useContext, useEffect, useRef } from "react";
 import { AppContext } from "..";
 
-function Key({ letter }: { letter: string }) {
+function Key({
+	letter,
+	wrongLetters,
+}: {
+	letter: string;
+	wrongLetters: Set<string>;
+}) {
 	const { onEnter, onDelete, onLetter } = useContext(AppContext);
+	const keyTile = useRef<any>();
+	useEffect(() => {
+		if (wrongLetters.has(letter)) {
+			// keyState = "#000000";
+			keyTile.current.style.backgroundColor = "#3a3a3a";
+		}
+	}, [wrongLetters]);
 	const selectLetter = () => {
 		if (letter === "ENTER") {
 			onEnter();
@@ -16,7 +29,8 @@ function Key({ letter }: { letter: string }) {
 	};
 	return (
 		<div
-			className="bg-gray-800 rounded-md text-2xl px-2 py-3 text-center capitalize"
+			ref={keyTile}
+			className="bg-gray-500 rounded-md text-2xl px-2 py-3 text-center capitalize"
 			onClick={() => {
 				selectLetter();
 			}}
