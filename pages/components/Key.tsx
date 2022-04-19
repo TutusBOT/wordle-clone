@@ -20,11 +20,11 @@ function Key({
 		}
 		// console.log(keyTile.current);
 
-		if (correctLetters.has(letter)) {
-			keyTile.current.style.backgroundColor = "#538d4e";
-		}
 		if (almostCorrectLetters.has(letter)) {
 			keyTile.current.style.backgroundColor = "#b59f3b";
+		}
+		if (correctLetters.has(letter)) {
+			keyTile.current.style.backgroundColor = "#538d4e";
 		}
 	}, [wrongLetters, correctLetters, almostCorrectLetters]);
 	const selectLetter = () => {

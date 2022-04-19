@@ -60,7 +60,7 @@ function Letter({ position, attempt }: { position: number; attempt: number }) {
 				" text-5xl border border-white capitalize w-12 h-12 text-center flex items-center justify-center"
 			}
 			style={{
-				backgroundColor: letterState,
+				backgroundColor: letterState || "transparent",
 			}}
 		>
 			{letter}

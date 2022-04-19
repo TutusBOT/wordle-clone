@@ -25,9 +25,15 @@ const Home: NextPage = () => {
 	});
 	useEffect(() => {
 		if (currentAttempt.attempt < 1) return;
+		console.log("attempt", currentAttempt.attempt);
+
 		let word = "";
 		for (let i = 0; i < 5; i++) {
 			word += board[currentAttempt.attempt - 1][i];
+		}
+		if (currentAttempt.attempt > 5 && !(word === currentWord)) {
+			setTimeout(() => alert("you lost"), 1200);
+			return;
 		}
 		if (word === currentWord) {
 			setTimeout(() => {
