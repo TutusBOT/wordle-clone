@@ -23,7 +23,18 @@ const Home: NextPage = () => {
 		attempt: 0,
 		position: 0,
 	});
-	useEffect(() => {}, [currentAttempt.attempt]);
+	useEffect(() => {
+		if (currentAttempt.attempt < 1) return;
+		let word = "";
+		for (let i = 0; i < 5; i++) {
+			word += board[currentAttempt.attempt - 1][i];
+		}
+		if (word === currentWord) {
+			setTimeout(() => {
+				alert("you won");
+			}, 1200);
+		}
+	}, [currentAttempt.attempt]);
 
 	const randomWord = useCallback(async () => {
 		const res = await axios.get("http://localhost:3000/api/getRandomWord");
