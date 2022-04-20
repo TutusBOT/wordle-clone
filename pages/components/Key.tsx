@@ -1,5 +1,6 @@
 import React, { MutableRefObject, useContext, useEffect, useRef } from "react";
 import { AppContext } from "..";
+import { mode } from "./mode";
 
 function Key({
 	letter,
@@ -12,7 +13,7 @@ function Key({
 	correctLetters: Set<string>;
 	almostCorrectLetters: Set<string>;
 }) {
-	const { onEnter, onDelete, onLetter } = useContext(AppContext);
+	const { onEnter, onDelete, onLetter, darkmode } = useContext(AppContext);
 	const keyTile = useRef<any>();
 	useEffect(() => {
 		if (wrongLetters.has(letter)) {
@@ -48,8 +49,10 @@ function Key({
 		<div
 			ref={keyTile}
 			className={
-				"bg-gray-500 rounded-md text-2xl h-16 text-center capitalize flex items-center justify-center " +
-				specialLetterCheck()
+				"bg-gray-500 rounded-md text-2xl h-16 text-center capitalize flex items-center justify-center cursor-pointer " +
+				specialLetterCheck() +
+				" " +
+				mode(darkmode)
 			}
 			onClick={() => {
 				selectLetter();

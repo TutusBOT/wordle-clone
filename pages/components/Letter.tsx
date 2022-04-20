@@ -6,9 +6,11 @@ import React, {
 	useState,
 } from "react";
 import { AppContext } from "..";
+import { mode } from "./mode";
 
 function Letter({ position, attempt }: { position: number; attempt: number }) {
-	const { board, currentWord, currentAttempt } = useContext(AppContext);
+	const { board, currentWord, currentAttempt, darkmode } =
+		useContext(AppContext);
 	const letter = board[attempt][position];
 	const letterTile = useRef<any>();
 	const [letterState, setLetterState] = useState("");
@@ -57,7 +59,8 @@ function Letter({ position, attempt }: { position: number; attempt: number }) {
 		<div
 			ref={letterTile}
 			className={
-				" text-4xl border border-gray-600 capitalize w-16 h-16 text-center flex items-center justify-center font-letters font-bold"
+				" text-4xl border border-gray-600 capitalize w-16 h-16 text-center flex items-center justify-center font-letters font-bold " +
+				mode(darkmode)
 			}
 			style={{
 				backgroundColor: letterState || "transparent",
