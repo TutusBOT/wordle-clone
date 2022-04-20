@@ -20,6 +20,10 @@ const Home: NextPage = () => {
 	useEffect(() => {
 		const set = new Set(wordsArray);
 		setWordsSet(set);
+		const usermode = localStorage.getItem("darkmode");
+		if (usermode !== null) {
+			setDarkmode(JSON.parse(usermode));
+		}
 	}, []);
 	const [currentAttempt, setCurrentAttempt] = useState({
 		attempt: 0,

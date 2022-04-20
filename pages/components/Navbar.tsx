@@ -20,6 +20,7 @@ function Navbar({ darkmode, setDarkmode }: Navbar) {
 					className="cursor-pointer"
 					onClick={() => {
 						setDarkmode(!darkmode);
+						localStorage.setItem("darkmode", (!darkmode).toString());
 					}}
 				>
 					{darkmode ? <MdDarkMode /> : <MdLightMode />}
