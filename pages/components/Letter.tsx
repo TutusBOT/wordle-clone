@@ -8,8 +8,13 @@ import React, {
 import { AppContext } from "..";
 import { mode } from "./mode";
 
-function Letter({ position, attempt }: { position: number; attempt: number }) {
-	const { board, currentWord, currentAttempt, darkmode } =
+interface Letter {
+	position: number;
+	attempt: number;
+}
+
+function Letter({ position, attempt }: Letter) {
+	const { board, currentWord, currentAttempt, darkmode, typedWrongWord } =
 		useContext(AppContext);
 	const letter = board[attempt][position];
 	const letterTile = useRef<any>();
@@ -55,6 +60,14 @@ function Letter({ position, attempt }: { position: number; attempt: number }) {
 			}, 200 + position * 200);
 		}
 	}, [currentAttempt]);
+	useEffect(() => {
+		if (typedWrongWord === true && attempt === currentAttempt.attempt) {
+			console.log("wrong word");
+			letterTile.current.classList.add("shake");
+		} else {
+			letterTile.current.classList.remove("shake");
+		}
+	}, [typedWrongWord]);
 	return (
 		<div
 			ref={letterTile}

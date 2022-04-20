@@ -17,6 +17,7 @@ const Home: NextPage = () => {
 	const [darkmode, setDarkmode] = useState(true);
 	const [currentWord, setCurrentWord] = useState("");
 	const [wordsSet, setWordsSet] = useState<Set<string>>();
+	const [typedWrongWord, setTypedWrongWord] = useState(false);
 	useEffect(() => {
 		const set = new Set(wordsArray);
 		setWordsSet(set);
@@ -79,7 +80,11 @@ const Home: NextPage = () => {
 		}
 		if (!wordsSet?.has(word)) {
 			// handle wrong word
-			alert("NOT IN A WORD LIST");
+			// alert("NOT IN A WORD LIST");
+			setTypedWrongWord(true);
+			setTimeout(() => {
+				setTypedWrongWord(false);
+			}, 400);
 			return;
 		}
 		setCurrentAttempt({
@@ -118,6 +123,7 @@ const Home: NextPage = () => {
 						onLetter,
 						currentWord,
 						darkmode,
+						typedWrongWord,
 					}}
 				>
 					<Board />
