@@ -76,7 +76,7 @@ function Keyboard() {
 	}, [handleKeyboard]);
 
 	return (
-		<div>
+		<div className="grid gap-2">
 			<div className="flex justify-center gap-2">
 				{keyRow1.map((key) => {
 					return (

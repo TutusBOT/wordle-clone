@@ -57,7 +57,7 @@ function Letter({ position, attempt }: { position: number; attempt: number }) {
 		<div
 			ref={letterTile}
 			className={
-				" text-5xl border border-white capitalize w-12 h-12 text-center flex items-center justify-center"
+				" text-4xl border border-gray-600 capitalize w-16 h-16 text-center flex items-center justify-center font-letters font-bold"
 			}
 			style={{
 				backgroundColor: letterState || "transparent",

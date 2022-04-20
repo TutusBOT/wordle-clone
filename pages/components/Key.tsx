@@ -38,10 +38,19 @@ function Key({
 		}
 		onLetter(letter);
 	};
+	const specialLetterCheck = () => {
+		if (letter === "ENTER" || letter === "DELETE") {
+			return "w-18 sm:w-24";
+		}
+		return "w-6 sm:w-12";
+	};
 	return (
 		<div
 			ref={keyTile}
-			className="bg-gray-500 rounded-md text-2xl px-2 py-3 text-center capitalize"
+			className={
+				"bg-gray-500 rounded-md text-2xl h-16 text-center capitalize flex items-center justify-center " +
+				specialLetterCheck()
+			}
 			onClick={() => {
 				selectLetter();
 			}}
