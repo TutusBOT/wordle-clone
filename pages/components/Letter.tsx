@@ -17,7 +17,7 @@ function Letter({ position, attempt }: Letter) {
 	const { board, currentWord, currentAttempt, darkmode, typedWrongWord } =
 		useContext(AppContext);
 	const letter = board[attempt][position];
-	const letterTile = useRef<any>();
+	const letterTile = useRef<HTMLDivElement>(null);
 	const [letterState, setLetterState] = useState("");
 	// const getCorrectWord = async () => {
 	// 	const wordsArray = await words();
@@ -48,7 +48,7 @@ function Letter({ position, attempt }: Letter) {
 		// console.log(correctWord);
 	};
 	useEffect(() => {
-		if (currentAttempt.attempt > attempt) {
+		if (currentAttempt.attempt > attempt && letterTile.current) {
 			letterTile.current.style.animation = `letter-rotate 400ms ease-in-out ${
 				position * 200
 			}ms`;
@@ -61,10 +61,14 @@ function Letter({ position, attempt }: Letter) {
 		}
 	}, [currentAttempt]);
 	useEffect(() => {
-		if (typedWrongWord === true && attempt === currentAttempt.attempt) {
+		if (
+			typedWrongWord === true &&
+			attempt === currentAttempt.attempt &&
+			letterTile.current
+		) {
 			console.log("wrong word");
 			letterTile.current.classList.add("shake");
-		} else {
+		} else if (letterTile.current) {
 			letterTile.current.classList.remove("shake");
 		}
 	}, [typedWrongWord]);

@@ -4,6 +4,7 @@ import Head from "next/head";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { wordsArray } from "./api/wordsArray";
 import { wordsSet } from "./api/wordsSet";
+import Alert from "./components/Alert";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { mode } from "./components/mode";
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
 	const [currentWord, setCurrentWord] = useState("");
 	const [wordsSet, setWordsSet] = useState<Set<string>>();
 	const [typedWrongWord, setTypedWrongWord] = useState(false);
+	const [alertText, setAlertText] = useState("");
 	useEffect(() => {
 		const set = new Set(wordsArray);
 		setWordsSet(set);
@@ -79,12 +81,14 @@ const Home: NextPage = () => {
 			word += board[currentAttempt.attempt][i];
 		}
 		if (!wordsSet?.has(word)) {
-			// handle wrong word
-			// alert("NOT IN A WORD LIST");
+			setAlertText("Not in a word list");
 			setTypedWrongWord(true);
 			setTimeout(() => {
 				setTypedWrongWord(false);
 			}, 400);
+			setTimeout(() => {
+				setAlertText("");
+			}, 1500);
 			return;
 		}
 		setCurrentAttempt({
@@ -129,6 +133,7 @@ const Home: NextPage = () => {
 					<Board />
 					<Keyboard />
 				</AppContext.Provider>
+				{alertText ? <Alert alertText={alertText} /> : null}
 			</main>
 
 			<footer></footer>

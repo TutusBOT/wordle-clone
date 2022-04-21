@@ -52,3 +52,17 @@ a {
 		transform: translateX(4%);
 	}
 }
+
+.disappear {
+	opacity: 0;
+	animation: disappear 1500ms ease-in-out;
+}
+
+@keyframes disappear {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
