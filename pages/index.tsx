@@ -75,7 +75,7 @@ const Home: NextPage = () => {
 		});
 	};
 	const onEnter = () => {
-		if (currentAttempt.position !== 5) return;
+		if (currentAttempt.position !== 5 || currentAttempt.attempt > 6) return;
 		let word = "";
 		for (let i = 0; i < 5; i++) {
 			word += board[currentAttempt.attempt][i];

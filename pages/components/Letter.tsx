@@ -62,6 +62,20 @@ function Letter({ position, attempt }: Letter) {
 	}, [currentAttempt]);
 	useEffect(() => {
 		if (
+			currentAttempt.attempt === attempt &&
+			currentAttempt.position - 1 === position &&
+			letter &&
+			letterTile.current
+		) {
+			console.log(letter);
+			// letterTile.current.style.transform = "rotate(30deg)";
+		} else if (letterTile.current) {
+			// letterTile.current.style.transform = "rotate(-30deg)";
+		}
+	}, [currentAttempt]);
+
+	useEffect(() => {
+		if (
 			typedWrongWord === true &&
 			attempt === currentAttempt.attempt &&
 			letterTile.current
@@ -76,7 +90,7 @@ function Letter({ position, attempt }: Letter) {
 		<div
 			ref={letterTile}
 			className={
-				" text-4xl border border-gray-600 capitalize w-16 h-16 text-center flex items-center justify-center font-letters font-bold " +
+				" text-4xl border border-gray-600 capitalize w-12 h-12 2xl:w-16 2xl:h-16 text-center flex items-center justify-center font-letters font-bold " +
 				mode(darkmode)
 			}
 			style={{

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { MdDarkMode, MdLeaderboard, MdLightMode } from "react-icons/md";
 import { mode } from "./mode";
 
 interface Navbar {
@@ -15,7 +15,15 @@ function Navbar({ darkmode, setDarkmode }: Navbar) {
 			}
 		>
 			<h1 className="col-start-2">Wordle</h1>
-			<div className="justify-self-end">
+			<div className="justify-self-end flex">
+				<div
+					className="cursor-pointer"
+					onClick={() => {
+						//handle statistics
+					}}
+				>
+					<MdLeaderboard />
+				</div>
 				<div
 					className="cursor-pointer"
 					onClick={() => {

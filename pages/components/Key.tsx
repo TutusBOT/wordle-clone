@@ -49,7 +49,7 @@ function Key({
 		<div
 			ref={keyTile}
 			className={
-				"bg-gray-500 rounded-md text-2xl h-16 text-center capitalize flex items-center justify-center cursor-pointer " +
+				"bg-gray-500 rounded-md 2xl:text-2xl h-10 md:h-12 2xl:h-16 text-center capitalize flex items-center justify-center cursor-pointer " +
 				specialLetterCheck() +
 				" " +
 				mode(darkmode)
