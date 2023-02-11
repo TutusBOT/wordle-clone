@@ -1,6 +1,5 @@
 module.exports = {
 	mode: "jit",
-	purge: ["./pages/**/*.{js,ts,jsx,tsx}"],
 	content: [
 		"./pages/**/*.{js,ts,jsx,tsx}",
 		"./components/**/*.{js,ts,jsx,tsx}",
@@ -9,7 +8,17 @@ module.exports = {
 		fontFamily: {
 			letters: ["Clear\\ Sans", "Helvetica\\ Neue", "Arial", "sans-serif"],
 		},
-		extend: {},
+		extend: {
+			animation: {
+				appear: "appear 1s ease-in-out forwards",
+			},
+			keyframes: {
+				appear: {
+					"0%": { opacity: 0 },
+					"100%": { opacity: 1 },
+				},
+			},
+		},
 	},
 	plugins: [],
 };
