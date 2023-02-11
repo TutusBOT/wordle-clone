@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { MdDarkMode, MdLeaderboard, MdLightMode } from "react-icons/md";
-import { mode } from "./mode";
+import { mode } from "../utils/mode";
 
 interface Navbar {
 	darkmode: boolean;
@@ -11,7 +11,7 @@ function Navbar({ darkmode, setDarkmode }: Navbar) {
 	return (
 		<nav
 			className={
-				"grid grid-cols-3 items-center w-full text-center text-white border-b border-gray-800 py-2 text-3xl h-14 "
+				"grid grid-cols-3 items-center w-full text-center text-white border-b border-gray-800 py-2 text-3xl h-14"
 			}
 		>
 			<h1 className="col-start-2">Wordle</h1>

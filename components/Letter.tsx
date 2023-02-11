@@ -1,17 +1,13 @@
-import React, {
-	useCallback,
-	useContext,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
-import { AppContext } from "..";
-import { mode } from "./mode";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { AppContext } from "../pages";
+import { mode } from "../utils/mode";
 
 interface Letter {
 	position: number;
 	attempt: number;
 }
+
+export const letterAnimationDelay = 1200;
 
 function Letter({ position, attempt }: Letter) {
 	const { board, currentWord, currentAttempt, darkmode, typedWrongWord } =
@@ -19,34 +15,7 @@ function Letter({ position, attempt }: Letter) {
 	const letter = board[attempt][position];
 	const letterTile = useRef<HTMLDivElement>(null);
 	const [letterState, setLetterState] = useState("");
-	// const getCorrectWord = async () => {
-	// 	const wordsArray = await words();
-	// 	console.log(wordsArray[0]);
 
-	// 	return wordsArray[0];
-	// };
-	// correctWord.then(console.log(correctWord[0]));
-	// console.log(getCorrectWord());
-	// const getWords = randomWord().then((res: any) => {
-	// 	return res;
-	// });
-	const getCorrectWord = async () => {
-		// randomWord.then((word: string[]) => {
-		// 	const correctWord = word;
-		// 	console.log(letter, correctWord);
-		// 	if (!letter) return setLetterState("");
-		// 	if (letter === correctWord[position])
-		// 		return setLetterState("bg-green-500");
-		// 	if (correctWord.includes(letter)) return setLetterState("bg-yellow-400");
-		// 	return setLetterState("bg-gray-700");
-		// });
-		// const correctWord = await randomWord();
-		// if (!letter) return setLetterState("");
-		// if (letter === correctWord[position]) return setLetterState("bg-green-500");
-		// if (correctWord.includes(letter)) return setLetterState("bg-yellow-400");
-		// return setLetterState("bg-gray-700");
-		// console.log(correctWord);
-	};
 	useEffect(() => {
 		if (currentAttempt.attempt > attempt && letterTile.current) {
 			letterTile.current.style.animation = `letter-rotate 400ms ease-in-out ${

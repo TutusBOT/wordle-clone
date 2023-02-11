@@ -1,6 +1,6 @@
 import PreviousMap from "postcss/lib/previous-map";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { AppContext } from "..";
+import { AppContext } from "../pages";
 import Key from "./Key";
 
 function Keyboard() {

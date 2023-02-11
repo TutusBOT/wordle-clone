@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useContext, useEffect, useRef } from "react";
-import { AppContext } from "..";
-import { mode } from "./mode";
+import { AppContext } from "../pages";
+import { mode } from "../utils/mode";
 
 function Key({
 	letter,
